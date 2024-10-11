@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5fdnt0d176rj"]
+
+[ext_resource type="Script" path="res://bird.gd" id="1_t4nls"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_gd5cy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ywt26"]
+
+[node name="RigidBody2D" type="RigidBody2D"]
+mass = 2.0
+gravity_scale = 2.0
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_t4nls")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(20.2, 20.2)
+mesh = SubResource("SphereMesh_gd5cy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ywt26")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

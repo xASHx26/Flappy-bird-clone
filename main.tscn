@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dutyntlrtthg4"]
+
+[ext_resource type="PackedScene" uid="uid://b5fdnt0d176rj" path="res://bird.tscn" id="1_0brq0"]
+[ext_resource type="Script" path="res://main.gd" id="1_4frbt"]
+[ext_resource type="PackedScene" uid="uid://crxbe4hu4xhwh" path="res://tiles.tscn" id="2_o028h"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_4frbt")
+pole = ExtResource("2_o028h")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(577, 325)
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 1.5
+autostart = true
+
+[node name="bird" parent="." instance=ExtResource("1_0brq0")]
+position = Vector2(577, 325)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

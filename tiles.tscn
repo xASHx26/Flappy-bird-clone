@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://crxbe4hu4xhwh"]
+
+[ext_resource type="Script" path="res://tiles.gd" id="1_valew"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0pkhm"]
+size = Vector2(17.2037, 63.4079)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8s2my"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0276"]
+size = Vector2(5.68205, 18.4649)
+
+[node name="tiles" type="Node2D"]
+script = ExtResource("1_valew")
+
+[node name="point" type="Area2D" parent="."]
+disable_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="point"]
+position = Vector2(1.5, 324.5)
+scale = Vector2(2.03445, 2.03445)
+shape = SubResource("RectangleShape2D_0pkhm")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[node name="die" type="Area2D" parent="."]
+
+[node name="up_pole" type="MeshInstance2D" parent="die"]
+position = Vector2(0, 128)
+scale = Vector2(33.8124, -256.233)
+mesh = SubResource("BoxMesh_8s2my")
+
+[node name="down_pole" type="MeshInstance2D" parent="die"]
+position = Vector2(0, 520)
+scale = Vector2(33.8124, -256.233)
+mesh = SubResource("BoxMesh_8s2my")
+
+[node name="up_pole2" type="CollisionShape2D" parent="die"]
+position = Vector2(1.25961e-07, 134)
+scale = Vector2(5.91473, -13.0679)
+shape = SubResource("RectangleShape2D_x0276")
+
+[node name="down_pole2" type="CollisionShape2D" parent="die"]
+position = Vector2(-2.51922e-07, 512)
+scale = Vector2(5.91473, -13.0679)
+shape = SubResource("RectangleShape2D_x0276")
+
+[connection signal="body_entered" from="point" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="die" to="." method="_on_die_body_entered"]
